@@ -9,7 +9,80 @@ I then fill it with a quick "how I'm feeling" section, a personal todo list, and
 
 ### What this is
 This is a script that's going to do some of that daily templating for me. It should be able to:
-- [] Create a new page with the date as the title
+- [x] Create a new page with the date as the title
 - [] Populate the weather (this would be cool to do dynamically based on my location but first pass is my default work location)
 - [] Start the two todo lists I use most
 - [] A dumb quote or tweet or something stupid in my timeline
+
+### Dependencies
+- This script uses babashka as a native scripting tool. It uses the shebang syntax to point to a usr/local/bb symlink. You can find out how to install that here: https://github.com/babashka/babashka (I brew installed it)
+-
+
+### Setting up
+- You will need to create a new integration
+- You will need a notion api key
+- You will need to figure out your database id
+- You will add both of those to a config.edn file at the root of your project (see config-example.edn)
+- You will need to add that integration to your database / page
+
+### Creating a Page in Notion
+Here's an example curl request
+```
+curl 'https://api.notion.com/v1/pages' \
+  -H 'Authorization: Bearer '"$NOTION_API_KEY"'' \
+  -H "Content-Type: application/json" \
+  -H "Notion-Version: 2021-08-16" \
+  --data '{
+	"parent": { "database_id": "48f8fee9cd794180bc2fec0398253067" },
+	"properties": {
+		"Name": {
+			"title": [
+				{
+					"text": {
+						"content": "Tuscan Kale"
+					}
+				}
+			]
+		},
+		"Description": {
+			"rich_text": [
+				{
+					"text": {
+						"content": "A dark green leafy vegetable"
+					}
+				}
+			]
+		},
+		"Food group": {
+			"select": {
+				"name": "Vegetable"
+			}
+		},
+		"Price": { "number": 2.5 }
+	},
+	"children": [
+		{
+			"object": "block",
+			"type": "heading_2",
+			"heading_2": {
+				"text": [{ "type": "text", "text": { "content": "Lacinato kale" } }]
+			}
+		},
+		{
+			"object": "block",
+			"type": "paragraph",
+			"paragraph": {
+				"text": [
+					{
+						"type": "text",
+						"text": {
+							"content": "Lacinato kale is a variety of kale with a long tradition in Italian cuisine, especially that of Tuscany. It is also known as Tuscan kale, Italian kale, dinosaur kale, kale, flat back kale, palm tree kale, or black Tuscan palm.",
+							"link": { "url": "https://en.wikipedia.org/wiki/Lacinato_kale" }
+						}
+					}
+				]
+			}
+		}
+	]
+}'
+```
