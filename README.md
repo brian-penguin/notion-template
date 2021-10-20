@@ -15,6 +15,10 @@ This is a script that's going to do some of that daily templating for me. It sho
 - [ ] ???
 - [ ] Profit
 
+### Here, have a picture
+<img width="977" alt="image" src="https://user-images.githubusercontent.com/7143499/138022609-c9ef6960-594e-45ce-b87f-0bd6d8167168.png">
+
+
 ### Dependencies
 - This script uses babashka as a native scripting tool. It uses the shebang syntax to point to a usr/local/bb symlink. You can find out how to install that here: https://github.com/babashka/babashka (I brew installed it)
 
