@@ -13,7 +13,7 @@
 (def daily-notion-page-title
   (.format date formatter)) ;;=> "Tuesday October 19 2021"
 
-(def config (edn/read-string (slurp "config.edn")))
+(def config (edn/read-string (slurp "/Users/briantenggren/projects/notion-templating/config.edn")))
 (def journal-database-id (:JOURNAL_ID config))
 (def notion-api-key (:NOTION_API_KEY config))
 ;; you can figure out your url https://www.weather.gov/documentation/services-web-api
@@ -53,7 +53,7 @@
             :heading_3 {:text [{:type :text :text {:content "Work Stuff"}}]}}
            {:object :block
             :type :to_do
-            :to_do {:checked false
+            :to_do {:checked true
                     :text [{:type :text :text {:content "Generate Daily Notes"}}]}}
            {:object :block
             :type :heading_3
@@ -61,7 +61,14 @@
            {:object :block
             :type :to_do
             :to_do {:checked false
-                    :text [{:type :text :text {:content "..."}}]}}]))
+                    :text [{:type :text :text {:content ""}}]}}
+           {:object :block
+            :type :heading_3
+            :heading_3 {:text [{:type :text :text {:content "For Tomorrow"}}]}}
+           {:object :block
+            :type :to_do
+            :to_do {:checked false
+                    :text [{:type :text :text {:content ""}}]}}]))
 
 (def request-url "https://api.notion.com/v1/pages")
 (def request-headers
