@@ -61,14 +61,14 @@
            {:object :block
             :type :to_do
             :to_do {:checked false
-                    :text [{:type :text :text {:content ""}}]}}
+                    :text [{:type :text :text {:content " "}}]}}
            {:object :block
             :type :heading_3
             :heading_3 {:text [{:type :text :text {:content "For Tomorrow"}}]}}
            {:object :block
             :type :to_do
             :to_do {:checked false
-                    :text [{:type :text :text {:content ""}}]}}]))
+                    :text [{:type :text :text {:content " "}}]}}]))
 
 (def request-url "https://api.notion.com/v1/pages")
 (def request-headers
@@ -87,8 +87,8 @@
                          {:body (json/generate-string request-body)
                           :headers request-headers
                           :throw false}))
+;(println (str "Notion says: " (:status response) (:body response)))
 (println (str "Notion says: " (:status response)))
-
 
 
 
