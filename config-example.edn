@@ -1,3 +1,4 @@
 {:NOTION_API_KEY "my_secret_key-from-the integration-page"
  :JOURNAL_ID "a 32 digit id here!"
- :FORECAST_URL "https://api.weather.gov/gridpoints/BOX/69,76/forecast"}
+ :FORECAST_URL "https://api.weather.gov/gridpoints/BOX/69,76/forecast"
+ :DAILY_FOCUS ["What things felt triggering and how did you feel and respond to them?"]}

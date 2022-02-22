@@ -18,6 +18,7 @@
 (def notion-api-key (:NOTION_API_KEY config))
 ;; you can figure out your url https://www.weather.gov/documentation/services-web-api
 (def forecast-url (:FORECAST_URL config))
+(def daily-focal-points (:DAILY_FOCUS config))
 
 (def forecast
   (-> (curl/get forecast-url {:throw false})
@@ -37,11 +38,23 @@
 (def weather-content
   (map forecast-period->content-block (take 3 forecast)))
 
+(defn daily-focus->content-block [focus-point]
+  {:object :block
+   :type :quote
+   :quote {:text [{:type :text :text {:content (str focus-point)}}]}})
+
+(def daily-focus-content
+  (map daily-focus->content-block daily-focal-points))
+
 (def page-content
   (concat [{:object :block
             :type :heading_2
             :heading_2 {:text [{:type :text :text {:content "Today"}}]}}]
           weather-content
+          [{:object :block
+            :type :heading_2
+            :heading_2 {:text [{:type :text :text {:content "Something to Keep in Mind"}}]}}]
+          daily-focus-content
           [{:object :block
             :type :heading_2
             :heading_2 {:text [{:type :text :text {:content "I'm feeling..."}}]}}
