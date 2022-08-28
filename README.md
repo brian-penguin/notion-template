@@ -31,6 +31,12 @@ This is a script that's going to do some of that daily templating for me. It sho
 - You can figure out your weather service url here https://www.weather.gov/documentation/services-web-api
 
 
+### Running 
+
+``` sh
+$ ./create_daily_notion.clj
+```
+
 ### Useful links
 - https://developers.notion.com/reference/intro
 - https://www.weather.gov/documentation/services-web-api
